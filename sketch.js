@@ -5,14 +5,14 @@ let cameraType = ''
 const CANVAS_WIDTH = 375
 const CANVAS_HEIGHT = 400
 
-let videoWidth = 320
-let videoHeight = 240
-const VIDEO_RATIO = videoWidth / videoHeight
+const VIDEO_WIDTH = 320
+const VIDEO_HEIGHT = 240
+const VIDEO_RATIO = VIDEO_WIDTH / VIDEO_HEIGHT
 
 const IMAGE_WIDTH = 200
 const IMAGE_HEIGHT = 160
 
-const VIDEO_POS_X = (CANVAS_WIDTH - videoWidth) / 2
+const VIDEO_POS_X = (CANVAS_WIDTH - VIDEO_WIDTH) / 2
 const VIDEO_POS_Y = 30
 
 const IMAGE_POS_X = CANVAS_WIDTH - IMAGE_WIDTH - 10
@@ -52,20 +52,20 @@ function draw() {
       capture,
       VIDEO_POS_X,
       VIDEO_POS_Y,
-      videoHeight * VIDEO_RATIO,
-      videoHeight,
+      VIDEO_HEIGHT * VIDEO_RATIO,
+      VIDEO_HEIGHT,
       VIDEO_POS_X,
       VIDEO_POS_Y,
-      videoWidth * 1.35,
-      videoHeight * 1.35
+      VIDEO_WIDTH * 1.35,
+      VIDEO_HEIGHT * 1.35
     )
   } else {
     image(
       capture,
       VIDEO_POS_X,
       VIDEO_POS_Y,
-      videoHeight * VIDEO_RATIO,
-      videoHeight
+      VIDEO_HEIGHT * VIDEO_RATIO,
+      VIDEO_HEIGHT
     )
   }
   pop()
