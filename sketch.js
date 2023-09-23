@@ -24,7 +24,6 @@ function preload() {
 
 function setup() {
   createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT)
-  background(215, 216, 216)
   capture = createCapture({
     video: {
       facingMode: cameraType,
@@ -43,8 +42,10 @@ function setup() {
 }
 
 function draw() {
+  background(215, 216, 216)
+
+  push()
   if (cameraType === 'user') {
-    push()
     translate(width, 0)
     scale(-1, 1)
     image(
@@ -55,19 +56,19 @@ function draw() {
       videoHeight,
       VIDEO_POS_X,
       VIDEO_POS_Y,
-      videoWidth,
-      videoHeight
+      videoWidth * 1.25,
+      videoHeight * 1.25
     )
-    pop()
   } else {
     image(
       capture,
       VIDEO_POS_X,
       VIDEO_POS_Y,
-      capture.width / 2,
-      capture.width / 2 / VIDEO_RATIO
+      videoHeight * VIDEO_RATIO,
+      videoHeight
     )
   }
+  pop()
 
   image(img, IMAGE_POS_X, IMAGE_POS_Y, IMAGE_WIDTH, IMAGE_HEIGHT)
 }
