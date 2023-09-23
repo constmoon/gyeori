@@ -24,6 +24,7 @@ function setup() {
   createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT)
   background(215, 216, 216)
   capture = createCapture(VIDEO)
+  capture.hide()
 
   captureButton = createButton('Capture')
   captureButton.position(VIDEO_WIDTH / 2, CANVAS_HEIGHT + 30)
