@@ -56,8 +56,8 @@ function draw() {
       videoHeight,
       VIDEO_POS_X,
       VIDEO_POS_Y,
-      videoWidth * 1.25,
-      videoHeight * 1.25
+      videoWidth * 1.35,
+      videoHeight * 1.35
     )
   } else {
     image(
