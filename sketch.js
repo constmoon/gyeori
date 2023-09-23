@@ -44,7 +44,7 @@ function setup() {
 
   saveButton = createButton('저장')
   saveButton.position(70, CANVAS_HEIGHT + 30)
-  saveButton.mousePressed(captureImage)
+  saveButton.mousePressed(saveImage)
 
   retakeButton = createButton('다시 찍기')
   retakeButton.position(200, CANVAS_HEIGHT + 30)
