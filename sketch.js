@@ -1,5 +1,6 @@
 let capture
 let img
+let cameraType = 'user'
 
 const CANVAS_WIDTH = 375
 const CANVAS_HEIGHT = 400
@@ -23,12 +24,21 @@ function preload() {
 function setup() {
   createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT)
   background(215, 216, 216)
-  capture = createCapture(VIDEO)
+  capture = createCapture({
+    video: {
+      facingMode: cameraType,
+    },
+  })
+  capture.size(VIDEO.width, VIDEO.height)
   capture.hide()
 
   captureButton = createButton('Capture')
-  captureButton.position(VIDEO_WIDTH / 2, CANVAS_HEIGHT + 30)
+  captureButton.position(50, CANVAS_HEIGHT + 30)
   captureButton.mousePressed(captureImage)
+
+  switchButton = createButton('Switch Camera')
+  switchButton.position(190, CANVAS_HEIGHT + 30)
+  switchButton.mousePressed(switchCamera)
 }
 
 function draw() {
@@ -38,4 +48,21 @@ function draw() {
 
 function captureImage() {
   saveCanvas('capture', 'jpg')
+}
+
+function switchCamera() {
+  if (cameraType === 'user') {
+    cameraType = 'environment'
+  } else {
+    cameraType = 'user'
+  }
+
+  capture = createCapture({
+    video: {
+      facingMode: cameraType,
+    },
+  })
+  console.log(cameraType)
+  capture.size(width, height)
+  capture.hide()
 }
