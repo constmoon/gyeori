@@ -47,12 +47,11 @@ function draw() {
   translate(width, 0)
   scale(-1, 1)
   if (cameraType === 'user') {
-    let croppedWidth = videoHeight * (4 / 3)
     image(
       capture,
       VIDEO_POS_X,
       VIDEO_POS_Y,
-      croppedWidth,
+      videoHeight * VIDEO_RATIO,
       videoHeight,
       VIDEO_POS_X,
       VIDEO_POS_Y,
@@ -60,7 +59,13 @@ function draw() {
       videoHeight
     )
   } else {
-    image(capture, VIDEO_POS_X, VIDEO_POS_Y, 320, 240)
+    image(
+      capture,
+      VIDEO_POS_X,
+      VIDEO_POS_Y,
+      capture.width / 2,
+      capture.width / 2 / VIDEO_RATIO
+    )
   }
 
   pop()
