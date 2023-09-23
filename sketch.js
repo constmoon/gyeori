@@ -43,10 +43,10 @@ function setup() {
 }
 
 function draw() {
-  push()
-  translate(width, 0)
-  scale(-1, 1)
   if (cameraType === 'user') {
+    push()
+    translate(width, 0)
+    scale(-1, 1)
     image(
       capture,
       VIDEO_POS_X,
@@ -58,6 +58,7 @@ function draw() {
       videoWidth,
       videoHeight
     )
+    pop()
   } else {
     image(
       capture,
@@ -67,8 +68,6 @@ function draw() {
       capture.width / 2 / VIDEO_RATIO
     )
   }
-
-  pop()
 
   image(img, IMAGE_POS_X, IMAGE_POS_Y, IMAGE_WIDTH, IMAGE_HEIGHT)
 }
