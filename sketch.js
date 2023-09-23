@@ -1,6 +1,8 @@
 let capture
 let img
-let cameraType = ''
+let cameraType = null
+let showCamera = true
+let capturedImage = null
 
 const CANVAS_WIDTH = 375
 const CANVAS_HEIGHT = 400
@@ -36,45 +38,82 @@ function setup() {
   capture.size(VIDEO.width, VIDEO.height)
   capture.hide()
 
-  captureButton = createButton('Capture')
-  captureButton.position(120, CANVAS_HEIGHT + 30)
+  captureButton = createButton('촬영')
+  captureButton.position(150, CANVAS_HEIGHT + 30)
   captureButton.mousePressed(captureImage)
+
+  saveButton = createButton('저장')
+  saveButton.position(70, CANVAS_HEIGHT + 30)
+  saveButton.mousePressed(captureImage)
+
+  retakeButton = createButton('다시 찍기')
+  retakeButton.position(200, CANVAS_HEIGHT + 30)
+  retakeButton.mousePressed(retake)
 }
 
 function draw() {
-  background(215, 216, 216)
-
-  push()
-  translate(width, 0)
-  scale(-1, 1)
-  if (cameraType === 'user') {
-    image(
-      capture,
-      VIDEO_POS_X,
-      VIDEO_POS_Y,
-      VIDEO_HEIGHT * VIDEO_RATIO,
-      VIDEO_HEIGHT,
-      VIDEO_POS_X,
-      VIDEO_POS_Y,
-      VIDEO_WIDTH * 1.35,
-      VIDEO_HEIGHT * 1.35
-    )
+  if (capturedImage) {
+    image(capturedImage, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
+    retakeButton.show()
+    saveButton.show()
+    captureButton.hide()
   } else {
-    image(
-      capture,
-      VIDEO_POS_X,
-      VIDEO_POS_Y,
-      VIDEO_HEIGHT * VIDEO_RATIO,
-      VIDEO_HEIGHT
-    )
-  }
-  pop()
+    retakeButton.hide()
+    saveButton.hide()
+    captureButton.show()
+    background(215, 216, 216)
 
-  image(img, IMAGE_POS_X, IMAGE_POS_Y, IMAGE_WIDTH, IMAGE_HEIGHT)
+    push()
+    translate(width, 0)
+    scale(-1, 1)
+    if (cameraType === 'user') {
+      image(
+        capture,
+        VIDEO_POS_X,
+        VIDEO_POS_Y,
+        VIDEO_HEIGHT * VIDEO_RATIO,
+        VIDEO_HEIGHT,
+        VIDEO_POS_X,
+        VIDEO_POS_Y,
+        VIDEO_WIDTH * 1.35,
+        VIDEO_HEIGHT * 1.35
+      )
+    } else {
+      image(
+        capture,
+        VIDEO_POS_X,
+        VIDEO_POS_Y,
+        VIDEO_HEIGHT * VIDEO_RATIO,
+        VIDEO_HEIGHT
+      )
+    }
+    pop()
+
+    image(img, IMAGE_POS_X, IMAGE_POS_Y, IMAGE_WIDTH, IMAGE_HEIGHT)
+  }
+}
+
+function retake() {
+  capturedImage = null
+}
+
+function saveImage() {
+  saveCanvas('capture', 'jpg')
 }
 
 function captureImage() {
-  saveCanvas('capture', 'jpg')
+  capturedImage = createImage(CANVAS_WIDTH, CANVAS_HEIGHT)
+  capturedImage.copy(
+    window,
+    0,
+    0,
+    CANVAS_WIDTH,
+    CANVAS_HEIGHT,
+    0,
+    0,
+    CANVAS_WIDTH,
+    CANVAS_HEIGHT
+  )
 }
 
 function switchCamera() {
