@@ -1,17 +1,18 @@
 let capture
 let img
-let cameraType = 'user'
+let cameraType = ''
 
 const CANVAS_WIDTH = 375
 const CANVAS_HEIGHT = 400
 
-const VIDEO_WIDTH = 320
-const VIDEO_HEIGHT = 240
+let videoWidth = 320
+let videoHeight = 240
+const VIDEO_RATIO = videoWidth / videoHeight
 
 const IMAGE_WIDTH = 200
 const IMAGE_HEIGHT = 160
 
-const VIDEO_POS_X = (CANVAS_WIDTH - VIDEO_WIDTH) / 2
+const VIDEO_POS_X = (CANVAS_WIDTH - videoWidth) / 2
 const VIDEO_POS_Y = 30
 
 const IMAGE_POS_X = CANVAS_WIDTH - IMAGE_WIDTH - 10
@@ -45,7 +46,23 @@ function draw() {
   push()
   translate(width, 0)
   scale(-1, 1)
-  image(capture, VIDEO_POS_X, VIDEO_POS_Y, VIDEO_WIDTH, VIDEO_HEIGHT)
+  if (cameraType === 'user') {
+    let croppedWidth = videoHeight * (4 / 3)
+    image(
+      capture,
+      VIDEO_POS_X,
+      VIDEO_POS_Y,
+      croppedWidth,
+      videoHeight,
+      VIDEO_POS_X,
+      VIDEO_POS_Y,
+      videoWidth,
+      videoHeight
+    )
+  } else {
+    image(capture, VIDEO_POS_X, VIDEO_POS_Y, 320, 240)
+  }
+
   pop()
 
   image(img, IMAGE_POS_X, IMAGE_POS_Y, IMAGE_WIDTH, IMAGE_HEIGHT)
@@ -67,7 +84,5 @@ function switchCamera() {
       facingMode: cameraType,
     },
   })
-  console.log(cameraType)
-  capture.size(width, height)
   capture.hide()
 }
