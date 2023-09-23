@@ -37,21 +37,17 @@ function setup() {
   capture.hide()
 
   captureButton = createButton('Capture')
-  captureButton.position(50, CANVAS_HEIGHT + 30)
+  captureButton.position(120, CANVAS_HEIGHT + 30)
   captureButton.mousePressed(captureImage)
-
-  switchButton = createButton('Switch Camera')
-  switchButton.position(190, CANVAS_HEIGHT + 30)
-  switchButton.mousePressed(switchCamera)
 }
 
 function draw() {
   background(215, 216, 216)
 
   push()
+  translate(width, 0)
+  scale(-1, 1)
   if (cameraType === 'user') {
-    translate(width, 0)
-    scale(-1, 1)
     image(
       capture,
       VIDEO_POS_X,
