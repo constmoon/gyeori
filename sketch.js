@@ -19,6 +19,10 @@ const IMAGE_POS_X = CANVAS_WIDTH - IMAGE_WIDTH - 10
 const IMAGE_POS_Y = CANVAS_HEIGHT - IMAGE_HEIGHT - 20
 
 function preload() {
+  cameraType = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+    ? 'user'
+    : ''
+
   img = loadImage('assets/event.png')
 }
 
