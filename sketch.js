@@ -42,7 +42,12 @@ function setup() {
 }
 
 function draw() {
+  push()
+  translate(width, 0)
+  scale(-1, 1)
   image(capture, VIDEO_POS_X, VIDEO_POS_Y, VIDEO_WIDTH, VIDEO_HEIGHT)
+  pop()
+
   image(img, IMAGE_POS_X, IMAGE_POS_Y, IMAGE_WIDTH, IMAGE_HEIGHT)
 }
 
