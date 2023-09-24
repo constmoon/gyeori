@@ -103,17 +103,7 @@ function saveImage() {
 
 function captureImage() {
   capturedImage = createImage(CANVAS_WIDTH, CANVAS_HEIGHT)
-  capturedImage.copy(
-    window,
-    0,
-    0,
-    CANVAS_WIDTH,
-    CANVAS_HEIGHT,
-    0,
-    0,
-    CANVAS_WIDTH,
-    CANVAS_HEIGHT
-  )
+  capturedImage.copy(window, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
 }
 
 function switchCamera() {
